@@ -19,6 +19,14 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
+  //toggle the complete checkbox function
+  function toggleTodo(id) {
+    const newTodos = [...todos];
+    const todo = newTodos.find((todo) => todo.id === id);
+    todo.complete = !todo.complete;
+    setTodos(newTodos);
+  }
+
   //argument is eventlistener
   function handleAddTodo(e) {
     const name = todoNameRef.current.value; //sets current value when click is listened to
@@ -33,7 +41,7 @@ function App() {
   return (
     //fragment component
     <>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>Add to do</button>
       <button>Clear </button>
