@@ -38,14 +38,19 @@ function App() {
     todoNameRef.current.value = null; // makes input field blank after submitting
   }
 
+  function handleClearTodos() {
+    const newTodos = todos.filter((todo) => !todo.compplete);
+    setTodos(newTodos);
+  }
+
   return (
     //fragment component
     <>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>Add to do</button>
-      <button>Clear </button>
-      <div>0 left to do</div>
+      <button onClick={handleClearTodos}>Clear </button>
+      <div>{todos.filter((todo) => !todo.complete).length} left to do</div>
     </>
   );
 }
