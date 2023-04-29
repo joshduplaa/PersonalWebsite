@@ -39,7 +39,7 @@ function App() {
   }
 
   function handleClearTodos() {
-    const newTodos = todos.filter((todo) => !todo.compplete);
+    const newTodos = todos.filter((todo) => !todo.complete);
     setTodos(newTodos);
   }
 
