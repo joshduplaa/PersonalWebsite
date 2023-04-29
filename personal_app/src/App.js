@@ -1,7 +1,7 @@
 //useRef hook allows us to reference elements in html or input
 import React, { useEffect, useState, useRef } from "react";
 import TodoList from "./TodoList";
-import uuidv4 from "uuid/v4"; //allows us to create random IDS
+import { v4 as uuidv4 } from "uuid"; //allows us to create random IDS
 
 const LOCAL_STORAGE_KEY = "todoApp.todos";
 
@@ -12,14 +12,11 @@ function App() {
   //effect below loads our todos if page is reloaded
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (storedTodos) {
-      setTodos(storedTodos); //puts todos from local storage on page if there.
-    }
-    setTodos();
-  });
+    if (storedTodos) setTodos(storedTodos);
+  }, []); //called once because of empty [] dependencies
   //anytime todos changes, it is saved to local storage using useEffect hook
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos)); // passes todos as strings into JSON file in local storage
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
   //argument is eventlistener
